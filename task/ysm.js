@@ -207,7 +207,7 @@ let url = {
         try {
     const result = JSON.parse(data)
         if(result.errcode == 0){
-        console.log('\n云扫码领取阅读奖励回执:成功🌝 '+result.data.gold+'\n今日阅读次数: '+result.data.day_read+' 今日阅读奖励: '+result.data.day_gold+' 当前余额'+result.data.last_gold+'\n')
+        console.log('\n云扫码领取阅读奖励回执:成功🌝 '+result.data.gold+'\n今日阅读次数: '+result.data.day_read+'\n剩余阅读次数：'+result.data.remain_read+'\n今日阅读奖励: '+result.data.day_gold+' 当前余额'+result.data.last_gold+'\n')
         if (result.data.remain_read <= 0) {
            console.log( `今日阅读已达上限，请明日继续`)
             } else if (result.data.day_read == 50) {
