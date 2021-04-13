@@ -4,7 +4,7 @@ name: ysm
 on:
   workflow_dispatch:
   schedule:
-     - cron: '3 1-13 * * *'
+     - cron: '3 0-14 * * *'
   watch:
     types: started
 jobs:
