@@ -56,6 +56,7 @@ hostname = .*.top
 
 
 const $ = new Env('云扫码自动阅读');
+const notify = $.isNode() ? require('./sendNotify') : '';
 let status;
 status = (status = ($.getval("ysmstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
 let ysmurlArr = [], ysmhdArr = [],ysmbodyArr = [],ysm2bodyArr = [],ysmtxArr = [],ysmcount = ''
@@ -212,6 +213,7 @@ let url = {
            console.log( `今日阅读已达上限，请明日继续`)
             } else if (result.data.day_read == 50) {
            console.log( `今日已阅读50篇，请手动阅读2篇再跑脚本`)
+           notify.sendNotify($.name+'\n', '【云扫码${$.index}】今日已阅读50篇，请手动阅读2篇再跑脚本')
            return;
             } else if(result.data.last_gold >= 3000){
     console.log('\n检测到当前金额可提现，前去执行提现,请去抓取提现的数据，如果没有提现数据脚本会自行终止!')                
