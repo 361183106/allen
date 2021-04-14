@@ -55,7 +55,7 @@ hostname = .*.top
 */
 
 
-const $ = new Env('云扫码自动阅读');
+const $ = new Env('【云扫码自动阅读】');
 const notify = $.isNode() ? require('./sendNotify') : '';
 let status;
 status = (status = ($.getval("ysmstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
@@ -68,7 +68,7 @@ let ysmtx = $.getdata('ysmtx')
 let ysmkey = ''
 let max = 30;
 let min = 10;
-
+let Account = ["【Sam】","【月锡】","【QF】","【RL】","【小爱豆】","【WYDSZ】","【逍遥云】","【DLL】"];
 
 if ($.isNode()) {
    if (process.env.YSM_URL && process.env.YSM_URL.indexOf('#') > -1) {
@@ -149,14 +149,14 @@ if (!ysmhdArr[0]) {
     console.log(`------------- 共${ysmhdArr.length}个账号-------------\n`)
       for (let i = 0; i < ysmhdArr.length; i++) {
         if (ysmhdArr[i]) {
-         
+          account = Account[i];
           ysmurl = ysmurlArr[i];
           ysmhd = ysmhdArr[i];
           ysmbody = ysmbodyArr[i];
           ysm2body = ysm2bodyArr[i];
           ysmtx = ysmtxArr[i];
           $.index = i + 1;
-          console.log(`\n开始【云扫码${$.index}】`)
+          console.log(`\n开始【云扫码${$.index}】`+`【账号名：${account}】\n`)
     await ysm1();
 
   }
@@ -213,7 +213,7 @@ let url = {
            console.log( `今日阅读已达上限，请明日继续`)
             } else if (result.data.day_read == 50) {
            console.log( `今日已阅读50篇，请手动阅读2篇再跑脚本`)
-           notify.sendNotify($.name+'\n', '【云扫码${$.index}】今日已阅读50篇，请手动阅读2篇再跑脚本')
+           notify.sendNotify($.name+'\n', '【云扫码${$.index}】【账号名：${account}】今日已阅读50篇，请手动阅读2篇再跑脚本')
            return;
             } else if(result.data.last_gold >= 3000){
     console.log('\n检测到当前金额可提现，前去执行提现,请去抓取提现的数据，如果没有提现数据脚本会自行终止!')                
