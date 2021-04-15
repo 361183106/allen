@@ -215,7 +215,7 @@ let url = {
             } else if (result.data.day_read == 50) {
            console.log( `今日已阅读50篇，请手动阅读2篇再跑脚本`)
            notify.sendNotify($.name+'\n', '【账号名：${account}】今日已阅读50篇，请手动阅读2篇再跑脚本')
-           return;
+           $.done()
             } else if(result.data.last_gold >= 3000){
     console.log('\n检测到当前金额可提现，前去执行提现,请去抓取提现的数据，如果没有提现数据脚本会自行终止!')                
 await ysmdh();
