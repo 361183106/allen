@@ -69,6 +69,7 @@ let ysmkey = ''
 let max = 30;
 let min = 10;
 let Account = ["【Sam】","【月锡】","【QF】","【RL】","【小爱豆】","【WYDSZ】","【逍遥云】","【DLL】"];
+let account = ''
 
 if ($.isNode()) {
    if (process.env.YSM_URL && process.env.YSM_URL.indexOf('#') > -1) {
@@ -213,7 +214,7 @@ let url = {
            console.log( `今日阅读已达上限，请明日继续`)
             } else if (result.data.day_read == 50) {
            console.log( `今日已阅读50篇，请手动阅读2篇再跑脚本`)
-           notify.sendNotify($.name+'\n', '【云扫码${$.index}】【账号名：${account}】今日已阅读50篇，请手动阅读2篇再跑脚本')
+           notify.sendNotify($.name+'\n', '【账号名：${account}】今日已阅读50篇，请手动阅读2篇再跑脚本')
            return;
             } else if(result.data.last_gold >= 3000){
     console.log('\n检测到当前金额可提现，前去执行提现,请去抓取提现的数据，如果没有提现数据脚本会自行终止!')                
