@@ -334,7 +334,7 @@ function ysmdh(timeout = 0) {
 let url = {
         url : "http:"+ysmurl.match(/http:(.*?)yunonline/)[1]+"yunonline/v1/user_gold",
         headers : JSON.parse(ysmhd),
-        body : 'openid='+ysmtx.match(/openid=(.*?)ua/)[1]+'gold=3000',
+        body : 'openid='+ysmtx.match(/openid=(.*?)ua/)[1]+'gold=5000',
 }
       $.post(url, async (err, resp, data) => {
         try {
@@ -371,7 +371,7 @@ let url = {
     const result = JSON.parse(data)
         if(result.errcode == 0){
         console.log('\n云扫码微信提现回执:成功🌝 '+result.msg)
-        $.msg($.name,"",'云扫码已成功提现至微信0.3元')
+        $.msg($.name,"",'云扫码已成功提现至微信0.5元')
         await ysm1();
 } else {
        console.log('\n云扫码微信提现回执:失败🚫 '+result.msg)
