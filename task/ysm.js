@@ -231,7 +231,7 @@ let url = {
 } else {
        if(result.errcode == 405){
 console.log('\n🧼来自肥皂的提示:'+result.msg+'尝试继续执行任务')
-      //await ysm1();
+      await ysm1();
 } 
 		
 /*    const result = JSON.parse(data)
