@@ -212,6 +212,7 @@ let url = {
         console.log('\n云扫码领取阅读奖励回执:成功🌝 '+result.data.gold+'\n今日阅读次数: '+result.data.day_read+'\n剩余阅读次数：'+result.data.remain_read+'\n今日阅读奖励: '+result.data.day_gold+' 当前余额'+result.data.last_gold+'\n')
         if (result.data.remain_read <= 0) {
            console.log( `今日阅读已达上限，请明日继续`)
+	   notify.sendNotify($.name+'\n', '【账号名：${account}】今日阅读已达上限，请明日继续')
             } else if(result.data.last_gold >= 5000){
            console.log('\n检测到当前金额可提现，前去执行提现,请去抓取提现的数据，如果没有提现数据脚本会自行终止!')                
             await ysmdh();
