@@ -199,7 +199,7 @@ $.msg($.name,"",'云扫码'+`${status}` +'微信提现数据获取成功！')
 
 
 //云扫码领取
-function ysm3(timeout = 0,account) {
+function ysm3(account) {
   return new Promise((resolve) => {
 let url = {
         url : "http:"+ysmurl.match(/http:(.*?)yunonline/)[1]+"yunonline/v1/add_gold",
@@ -258,12 +258,12 @@ console.log('\n云扫码领取阅读奖励回执:失败🚫 '+result.msg)
         } finally {
           resolve()
         }
-    },timeout)
+    })
   })
 }
 
 //云扫码提交     
-function ysm2(timeout = 0,account) {
+function ysm2(account) {
   return new Promise((resolve) => {
 let url = {
         url : ysmkey,
@@ -291,13 +291,13 @@ let url = {
         } finally {
           resolve()
         }
-    },timeout)
+    })
   })
 }
 
 
 //云扫码key
-function ysm1(timeout = 0,account) {
+function ysm1(account) {
   return new Promise((resolve) => {
 let url = {
         url : "http:"+ysmurl.match(/http:(.*?)yunonline/)[1]+"yunonline/v1/task",
@@ -331,7 +331,7 @@ console.log('云扫码获取key回执:失败🚫 '+result.msg+' 已停止当前�
         } finally {
           resolve()
         }
-    },timeout)
+    })
   })
 }
 
