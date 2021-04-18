@@ -158,7 +158,7 @@ if (!ysmhdArr[0]) {
           ysmtx = ysmtxArr[i];
           $.index = i + 1;
           console.log(`\n开始【云扫码${$.index}】`+`【账号名：${account}】\n`)
-    await ysm1();
+    await ysm1(account);
 
   }
   //await ysmtx();
@@ -199,7 +199,7 @@ $.msg($.name,"",'云扫码'+`${status}` +'微信提现数据获取成功！')
 
 
 //云扫码领取
-function ysm3(timeout = 0) {
+function ysm3(timeout = 0,account) {
   return new Promise((resolve) => {
 let url = {
         url : "http:"+ysmurl.match(/http:(.*?)yunonline/)[1]+"yunonline/v1/add_gold",
@@ -212,26 +212,27 @@ let url = {
         console.log('\n云扫码领取阅读奖励回执:成功🌝 '+result.data.gold+'\n今日阅读次数: '+result.data.day_read+'\n剩余阅读次数：'+result.data.remain_read+'\n今日阅读奖励: '+result.data.day_gold+' 当前余额'+result.data.last_gold+'\n')
         if (result.data.remain_read <= 0) {
            console.log( `今日阅读已达上限，请明日继续`)
-            } else if (result.data.day_read == 50) {
+            } else if(result.data.last_gold >= 5000){
+           console.log('\n检测到当前金额可提现，前去执行提现,请去抓取提现的数据，如果没有提现数据脚本会自行终止!')                
+            await ysmdh();
+	    } else if (result.data.day_read == 50) {
            console.log( `今日已阅读50篇，请手动阅读2篇再跑脚本`)
+           notify.sendNotify($.name+'\n', '【账号名：${account}】今日已阅读50篇，请手动阅读2篇再跑脚本')
             } else if (result.data.day_read < 50) {
            console.log( `今日阅读未达50篇，继续阅读`)
             await $.wait(2000);
-            await ysm1();
+            await ysm1(account);
             }else if (result.data.day_read > 50) {
            console.log( `今日阅读未达上限，继续阅读`)
             await $.wait(2000);
-            await ysm1();
-            }else if(result.data.last_gold >= 5000){
-           console.log('\n检测到当前金额可提现，前去执行提现,请去抓取提现的数据，如果没有提现数据脚本会自行终止!')                
-            await ysmdh();
-}      
+            await ysm1(account);
+            }
       
         
 } else {
        if(result.errcode == 405){
 console.log('\n🧼来自肥皂的提示:'+result.msg+'尝试继续执行任务')
-      await ysm1();
+      await ysm1(account);
 } 
 		
 /*    const result = JSON.parse(data)
@@ -262,7 +263,7 @@ console.log('\n云扫码领取阅读奖励回执:失败🚫 '+result.msg)
 }
 
 //云扫码提交     
-function ysm2(timeout = 0) {
+function ysm2(timeout = 0,account) {
   return new Promise((resolve) => {
 let url = {
         url : ysmkey,
@@ -274,7 +275,7 @@ let url = {
          //console.log('\n开始重定向跳转，跳转返回结果：'+data)
         if (err) {
           console.log(`\n${$.name} 🧼来自肥皂的提示:key请求提交失败,尝试重新执行任务`)
-     await ysm1();
+     await ysm1(account);
         } else {
            
     //const result = JSON.parse(data)
@@ -283,7 +284,7 @@ let url = {
         console.log("随机延时"+random+"毫秒");
 	await $.wait(random);     
         //await $.wait(9000);
-        await ysm3(); 
+        await ysm3(account); 
        
         }} catch (e) {
           //$.logErr(e, resp);
@@ -296,7 +297,7 @@ let url = {
 
 
 //云扫码key
-function ysm1(timeout = 0) {
+function ysm1(timeout = 0,account) {
   return new Promise((resolve) => {
 let url = {
         url : "http:"+ysmurl.match(/http:(.*?)yunonline/)[1]+"yunonline/v1/task",
@@ -319,7 +320,7 @@ let url = {
         ysmkey = result.data.link
         //$.log(ysmkey)
         await $.wait(1000);
-        await ysm2();
+        await ysm2(account);
 }
         
 } else {
