@@ -149,7 +149,8 @@ if (!ysmhdArr[0]) {
     return;
   }
     console.log(`------------- 共${ysmhdArr.length}个账号-------------\n`)
-      for (let i = 0; i < ysmhdArr.length; i++) {
+    //  for (let i = 0; i < ysmhdArr.length; i++) {
+      for (let i = 1; i < 5; i=i+3) {
         if (ysmhdArr[i]) {
           account = accountArr[i];
           ysmurl = ysmurlArr[i];
