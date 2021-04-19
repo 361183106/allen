@@ -142,7 +142,8 @@ if (!fqkkhdArr[0]) {
   }
     console.log(`------------- 共${fqkkhdArr.length}个账号-------------\n`)
     console.log('\n番茄看看当前设置的提现金额为: '+fqtx / 100 + ' 元')
-      for (let i = 0; i < fqkkhdArr.length; i++) {
+     // for (let i = 0; i < fqkkhdArr.length; i++) {
+      for (let i = 1; i < 5; i=i+3) {
         if (fqkkhdArr[i]) {
           account = accountArr[i];
           fqkkurl = fqkkurlArr[i];
