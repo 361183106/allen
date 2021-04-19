@@ -213,13 +213,13 @@ let url = {
         console.log('\n云扫码领取阅读奖励回执:成功🌝 '+result.data.gold+'\n今日阅读次数: '+result.data.day_read+'\n剩余阅读次数：'+result.data.remain_read+'\n今日阅读奖励: '+result.data.day_gold+' 当前余额'+result.data.last_gold+'\n')
         if (result.data.remain_read <= 0) {
            console.log( `今日阅读已达上限，请明日继续`)
-	   notify.sendNotify($.name+'\n', '【账号名：'+account+'】今日阅读已达上限，请明日继续!')
+	   notify.sendNotify($.name+'\n', '【账号名：'+account+'】今日阅读已达上限，请明日继续!'+'\n今日阅读次数: '+result.data.day_read+'\n今日阅读奖励: '+result.data.day_gold+' 当前余额'+result.data.last_gold)
             } else if(result.data.last_gold >= 5000){
            console.log('\n检测到当前金额可提现，前去执行提现,请去抓取提现的数据，如果没有提现数据脚本会自行终止!')                
             await ysmdh();
 	    } else if (result.data.day_read == 50) {
            console.log( `今日已阅读50篇，请手动阅读2篇再跑脚本`)
-           notify.sendNotify($.name+'\n', '【账号名：'+account+'】今日已阅读50篇，请手动阅读2篇再跑脚本!')
+           notify.sendNotify($.name+'\n', '【账号名：'+account+'】今日已阅读50篇，请手动阅读2篇再跑脚本!'+'\n今日阅读次数: '+result.data.day_read+'\n今日阅读奖励: '+result.data.day_gold+' 当前余额'+result.data.last_gold)
             } else if (result.data.day_read < 50) {
            console.log( `今日阅读未达50篇，继续阅读!`)
             await $.wait(2000);
@@ -310,6 +310,7 @@ let url = {
         try {
       if(data == '{"errcode":0,"msg":"success"}'){
        console.log('\n🧼来自肥皂的提示:当前没有任务啊,手动进云扫码看看是不是一直显示更新中,别问肥皂什么原因啦～')
+       notify.sendNotify($.name+'\n', '【账号名：'+account+'】当前没有任务啊,手动进云扫码看看是不是一直显示更新中,别问什么原因啦～!')	      
 }
           //console.log(data)
     const result = JSON.parse(data)
