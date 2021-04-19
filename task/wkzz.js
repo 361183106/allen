@@ -58,7 +58,7 @@ hostname = wx.tiantianaiyuedu.site
 */
 
 
-const $ = new Env('微客众智自动阅读');
+const $ = new Env('【微客众智自动阅读】');
 const notify = $.isNode() ? require('./sendNotify') : '';
 let status;
 status = (status = ($.getval("wkzzstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
