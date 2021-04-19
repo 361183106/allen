@@ -59,12 +59,15 @@ hostname = wx.tiantianaiyuedu.site
 
 
 const $ = new Env('微客众智自动阅读');
+const notify = $.isNode() ? require('./sendNotify') : '';
 let status;
 status = (status = ($.getval("wkzzstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
 let wkzzurlArr = [], wkzzhdArr = [],wkzzcount = ''
+let accountArr = ["【Sam】","【月锡】","【小爱豆】","【QF】","【RL】","【WYDSZ】"]
 let times = Math.round(Date.now() / 1000)
 let wkzzurl = $.getdata('wkzzurl')
 let wkzzhd = $.getdata('wkzzhd')
+let account = $.getdata('account')
 let wkzzkey = '',id = '',uid='',tid='',name=''
 let max = 60
 let min = 17
@@ -97,11 +100,11 @@ if (!wkzzhdArr[0]) {
     console.log(`------------- 共${wkzzhdArr.length}个账号-------------\n`)
       for (let i = 0; i < wkzzhdArr.length; i++) {
         if (wkzzhdArr[i]) {
-         
+          account = accountArr[i];
           wkzzurl = wkzzurlArr[i];
           wkzzhd = wkzzhdArr[i];
           $.index = i + 1;
-          console.log(`\n开始【微客众智${$.index}】`)
+          console.log(`\n开始【微客众智${$.index}】`+`【账号名：${account}】\n`)
     await wkzz1();
 
   }
@@ -151,7 +154,7 @@ await wkzzlb();
         
 } else {
 console.log('微客众智获取用户信息失败 已停止当前账号运行!')
-
+notify.sendNotify($.name+'\n', '【账号名：'+account+'】获取用户信息失败 已停止当前账号运行!')
 }
         } catch (e) {
           //$.logErr(e, resp);
@@ -218,7 +221,7 @@ let url = {
         if(result.errors == false){
 
         console.log('\n微客众智获取用户信息成功\n今日阅读次数: '+result.data.read_task_count+' '+'\n今日阅读奖励'+result.data.read_money)
-        
+        notify.sendNotify($.name+'\n', '【账号名：'+account+'】\n今日阅读次数: '+result.data.read_task_count+'\n今日阅读奖励: '+result.data.read_money)
 } else {
        console.log('\n微客众智获取用户信息失败 '+result.msg)
 }
