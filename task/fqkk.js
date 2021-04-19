@@ -148,7 +148,7 @@ if (!fqkkhdArr[0]) {
           fqkkurl = fqkkurlArr[i];
           fqkkhd = fqkkhdArr[i];
           $.index = i + 1;
-          console.log(`\n开始【番茄看看${$.index}】`)
+          console.log(`\n开始【番茄看看${$.index}】`+`【账号名：${account}】\n`)
 
     await fqkk1();
 
