@@ -265,7 +265,7 @@ let url = {
         fqjs++
 } else {
 console.log('番茄看看获取key回执:失败🚫 '+result.msg+' 已停止当前账号运行!')
-notify.sendNotify($.name+'\n', '【账号名：${account}】'+result.msg+' 已停止当前账号运行!')	
+notify.sendNotify($.name+'\n', '【账号名：'+account'】'+result.msg+' 已停止当前账号运行!')	
 }
         } catch (e) {
           //$.logErr(e, resp);
