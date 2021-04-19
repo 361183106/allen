@@ -190,6 +190,7 @@ let url = {
 	await fqkk1();
 } else {
        console.log('\n番茄看看领取阅读奖励回执:失败🚫 '+result.msg+'\n今日阅读次数: '+result.data.infoView.num+' 今日阅读奖励: '+result.data.infoView.score)
+       notify.sendNotify($.name+'\n', '【账号名：'+account+'】\n今日阅读次数: '+result.data.infoView.num+' 今日阅读奖励: '+result.data.infoView.score)	
 }
    
         } catch (e) {
