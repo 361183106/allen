@@ -60,16 +60,17 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 let status;
 status = (status = ($.getval("ysmstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
 let ysmurlArr = [], ysmhdArr = [],ysmbodyArr = [],ysm2bodyArr = [],ysmtxArr = [],ysmcount = ''
+let accountArr = ["【Sam】","【月锡】","【QF】","【RL】","【小爱豆】","【WYDSZ】","【逍遥云】","【DLL】"]
 let ysmurl = $.getdata('ysmurl')
 let ysmhd = $.getdata('ysmhd')
 let ysmbody = $.getdata('ysmbody')
 let ysm2body = $.getdata('ysm2body')
 let ysmtx = $.getdata('ysmtx')
+let account = $.getdata('account')
 let ysmkey = ''
 let max = 30;
 let min = 10;
-let Account = ["【Sam】","【月锡】","【QF】","【RL】","【小爱豆】","【WYDSZ】","【逍遥云】","【DLL】"];
-let account = ''
+
 
 if ($.isNode()) {
    if (process.env.YSM_URL && process.env.YSM_URL.indexOf('#') > -1) {
@@ -150,7 +151,7 @@ if (!ysmhdArr[0]) {
     console.log(`------------- 共${ysmhdArr.length}个账号-------------\n`)
       for (let i = 0; i < ysmhdArr.length; i++) {
         if (ysmhdArr[i]) {
-          account = Account[i];
+          account = accountArr[i];
           ysmurl = ysmurlArr[i];
           ysmhd = ysmhdArr[i];
           ysmbody = ysmbodyArr[i];
@@ -158,7 +159,7 @@ if (!ysmhdArr[0]) {
           ysmtx = ysmtxArr[i];
           $.index = i + 1;
           console.log(`\n开始【云扫码${$.index}】`+`【账号名：${account}】\n`)
-    await ysm1(account);
+    await ysm1();
 
   }
   //await ysmtx();
@@ -199,7 +200,7 @@ $.msg($.name,"",'云扫码'+`${status}` +'微信提现数据获取成功！')
 
 
 //云扫码领取
-function ysm3(account) {
+function ysm3() {
   return new Promise((resolve) => {
 let url = {
         url : "http:"+ysmurl.match(/http:(.*?)yunonline/)[1]+"yunonline/v1/add_gold",
@@ -222,18 +223,18 @@ let url = {
             } else if (result.data.day_read < 50) {
            console.log( `今日阅读未达50篇，继续阅读`)
             await $.wait(2000);
-            await ysm1(account);
+            await ysm1();
             }else if (result.data.day_read > 50) {
            console.log( `今日阅读未达上限，继续阅读`)
             await $.wait(2000);
-            await ysm1(account);
+            await ysm1();
             }
       
         
 } else {
        if(result.errcode == 405){
 console.log('\n🧼来自肥皂的提示:'+result.msg+'尝试继续执行任务')
-      await ysm1(account);
+      await ysm1();
 } 
 		
 /*    const result = JSON.parse(data)
@@ -264,7 +265,7 @@ console.log('\n云扫码领取阅读奖励回执:失败🚫 '+result.msg)
 }
 
 //云扫码提交     
-function ysm2(account) {
+function ysm2() {
   return new Promise((resolve) => {
 let url = {
         url : ysmkey,
@@ -276,7 +277,7 @@ let url = {
          //console.log('\n开始重定向跳转，跳转返回结果：'+data)
         if (err) {
           console.log(`\n${$.name} 🧼来自肥皂的提示:key请求提交失败,尝试重新执行任务`)
-     await ysm1(account);
+     await ysm1();
         } else {
            
     //const result = JSON.parse(data)
@@ -285,7 +286,7 @@ let url = {
         console.log("随机延时"+random+"毫秒");
 	await $.wait(random);     
         //await $.wait(9000);
-        await ysm3(account); 
+        await ysm3(); 
        
         }} catch (e) {
           //$.logErr(e, resp);
@@ -298,7 +299,7 @@ let url = {
 
 
 //云扫码key
-function ysm1(account) {
+function ysm1() {
   return new Promise((resolve) => {
 let url = {
         url : "http:"+ysmurl.match(/http:(.*?)yunonline/)[1]+"yunonline/v1/task",
@@ -321,7 +322,7 @@ let url = {
         ysmkey = result.data.link
         //$.log(ysmkey)
         await $.wait(1000);
-        await ysm2(account);
+        await ysm2();
 }
         
 } else {
