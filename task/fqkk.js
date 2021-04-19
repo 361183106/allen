@@ -61,12 +61,15 @@ hostname = m.*.top
 
 
 const $ = new Env('番茄看看自动阅读');
+const notify = $.isNode() ? require('./sendNotify') : '';
 let status;
 status = (status = ($.getval("fqkkstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
 let fqkkurlArr = [], fqkkhdArr = [],fqkkbodyArr = [],fqkkcount = ''
+let accountArr = ["【Sam】","【月锡】","【QF】","【RL】","【小爱豆】","【逍遥云】","【WYDSZ】","【DLL】"]
 let fqkkurl = $.getdata('fqkkurl')
 let fqkkhd = $.getdata('fqkkhd')
 let fqkey = ''
+let account = $.getdata('account')
 let fqkkxh = ($.getval('fqkkxh') || '20');  // 此处修改循环次数，默认一百
 let fqtx = ($.getval('fqtx') || '100');  // 此处修改提现金额，0.1元等于10，默认为提现一元，也就是100
 let max = 60
@@ -141,7 +144,7 @@ if (!fqkkhdArr[0]) {
     console.log('\n番茄看看当前设置的提现金额为: '+fqtx / 100 + ' 元')
       for (let i = 0; i < fqkkhdArr.length; i++) {
         if (fqkkhdArr[i]) {
-         
+          account = accountArr[i];
           fqkkurl = fqkkurlArr[i];
           fqkkhd = fqkkhdArr[i];
           $.index = i + 1;
@@ -262,6 +265,7 @@ let url = {
         fqjs++
 } else {
 console.log('番茄看看获取key回执:失败🚫 '+result.msg+' 已停止当前账号运行!')
+notify.sendNotify($.name+'\n', '【账号名：${account}】'+result.msg+' 已停止当前账号运行!')	
 }
         } catch (e) {
           //$.logErr(e, resp);
