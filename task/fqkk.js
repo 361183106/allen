@@ -60,7 +60,7 @@ hostname = m.*.top
 */
 
 
-const $ = new Env('番茄看看自动阅读');
+const $ = new Env('【番茄看看自动阅读】');
 const notify = $.isNode() ? require('./sendNotify') : '';
 let status;
 status = (status = ($.getval("fqkkstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
