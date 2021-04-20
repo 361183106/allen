@@ -221,7 +221,7 @@ let url = {
         if(result.errors == false){
 
         console.log('\n微客众智获取用户信息成功\n今日阅读次数: '+result.data.read_task_count+' '+'\n今日阅读奖励'+result.data.read_money)
-        notify.sendNotify($.name+'\n', '【账号名：'+account+'】\n今日阅读次数: '+result.data.read_task_count+'\n今日阅读奖励: '+result.data.read_money)
+       // notify.sendNotify($.name+'\n', '【账号名：'+account+'】\n今日阅读次数: '+result.data.read_task_count+'\n今日阅读奖励: '+result.data.read_money)
 } else {
        console.log('\n微客众智获取用户信息失败 '+result.msg)
 }
