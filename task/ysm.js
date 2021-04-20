@@ -278,7 +278,7 @@ let url = {
          //console.log('\n开始重定向跳转，跳转返回结果：'+data)
         if (err) {
           console.log(`\n${$.name} 🧼来自肥皂的提示:key请求提交失败,尝试重新执行任务`)
-     await ysm1();
+     //await ysm1();
         } else {
            
     //const result = JSON.parse(data)
